@@ -1,0 +1,202 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Product API",
+      "version": "1.0.0",
+      "description": "API for managing products in the Tongadive platform."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4001/api/tongadive",
+        "description": "Local development server"
+      }
+    ],
+    "paths": {
+      "/add": {
+        "post": {
+          "summary": "Add multiple products",
+          "description": "Inserts multiple products into the database.",
+          "operationId": "addProducts",
+          "tags": ["Products"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                },
+                "example": [
+                  {
+                    "name": "Wireless Headphones",
+                    "description": "High-quality noise-canceling wireless headphones with 40-hour battery life.",
+                    "category": "Electronics",
+                    "price": 99.99
+                  },
+                  {
+                    "name": "Smartphone Stand",
+                    "description": "Adjustable aluminum stand for smartphones and tablets.",
+                    "category": "Accessories",
+                    "price": 19.99
+                  }
+                ]
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Products added successfully.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Products added successfully"
+                      },
+                      "productsAdded": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Product"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid request format.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Invalid input data format."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Error while creating products"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/get": {
+        "get": {
+          "summary": "Get all products",
+          "description": "Retrieves a list of all products from the database.",
+          "operationId": "getAllProducts",
+          "tags": ["Products"],
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved product list.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  },
+                  "example": [
+                    {
+                      "name": "Wireless Headphones",
+                      "description": "High-quality noise-canceling wireless headphones with 40-hour battery life.",
+                      "category": "Electronics",
+                      "price": 99.99
+                    },
+                    {
+                      "name": "Smartphone Stand",
+                      "description": "Adjustable aluminum stand for smartphones and tablets.",
+                      "category": "Accessories",
+                      "price": 19.99
+                    }
+                  ]
+                }
+              }
+            },
+            "404": {
+              "description": "No products found.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "No products found."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Error while fetching products"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Product": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Wireless Headphones"
+            },
+            "description": {
+              "type": "string",
+              "example": "High-quality noise-canceling wireless headphones with 40-hour battery life."
+            },
+            "category": {
+              "type": "string",
+              "example": "Electronics"
+            },
+            "price": {
+              "type": "number",
+              "example": 99.99
+            }
+          }
+        }
+      }
+    }
+  }
+  
