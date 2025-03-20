@@ -27,8 +27,8 @@ It allows adding multiple products and retrieving the product list.
 
 ### **1️⃣ Clone the Repository**
 ```sh
-git clone https://github.com/your-username/tongadive-product-api.git
-cd tongadive-product-api
+git clone https://github.com/DevDreamer-pk/tongadive.git
+cd tongadive
 ```
 
 ### **2️⃣ Install Dependencies**
@@ -102,7 +102,7 @@ cd tongadive-product-api
 #### ***Request***
 
 ```sh
-    http://localhost:4001/api/tongadive/get HTTP/1.1
+    http://localhost:3000/api/tongadive/get HTTP/1.1
     -H 'accept: application/json'
 ```
 
